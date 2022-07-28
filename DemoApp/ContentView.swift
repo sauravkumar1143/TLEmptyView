@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -20,12 +21,13 @@ struct ContentView: View {
                 Text("Calendar")
                     .frame(width: geometry.size.width, height: 100, alignment: .center)
                 
-                TLEmptyView(message: "Dynamic Message", imageName: "placeholderImage", buttonTitle: "Refresh Link")
-                        .frame(width: 300, alignment: .center)
+                TLEmptyView(message: "Dynamic Message", imageName: "placeholderImage", buttonTitle: "Refresh Link") {
+                    print("Tapped on button")
+                }
+                
             }
         }
-
-}
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TLEmptyView: View {
     
@@ -17,11 +18,13 @@ struct TLEmptyView: View {
     private let message: String
     private let imageName: String
     private let buttonTitle: String?
+    var tappedOnButton: (() -> Void)?
     
-    init(message: String, imageName: String, buttonTitle: String? = nil) {
+    init(message: String, imageName: String, buttonTitle: String? = nil, tappedOnButton: (() -> Void)? = nil) {
         self.message = message
         self.imageName = imageName
         self.buttonTitle = buttonTitle
+        self.tappedOnButton = tappedOnButton
     }
     
     var body: some View {
@@ -40,7 +43,7 @@ struct TLEmptyView: View {
                 
             if let title = buttonTitle {
                 Button(action: {
-                    
+                    self.tappedOnButton?()
                 }) {
                     Text(title).padding()
                 }
