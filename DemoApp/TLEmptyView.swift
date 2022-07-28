@@ -13,8 +13,10 @@ struct TLEmptyView: View {
     private struct Constants {
         static let imageWidth: CGFloat = 116
         static let imageHeight: CGFloat = 116
+        static let buttonColor = Color(red: 140/255, green: 105/255, blue: 255/255)
+        static let buttonHeight: CGFloat = 40
     }
-        
+    
     private let message: String
     private let imageName: String
     private let buttonTitle: String?
@@ -28,8 +30,8 @@ struct TLEmptyView: View {
     }
     
     var body: some View {
-       
-        VStack(alignment: .center, spacing: 0) {
+        
+        VStack(alignment: .center, spacing: 16) {
             
             Image(imageName)
                 .resizable()
@@ -39,16 +41,20 @@ struct TLEmptyView: View {
             
             Text(message)
                 .multilineTextAlignment(.center)
-                .offset(CGSize(width: 0, height: 16))
-                
+                .padding(.bottom, 16)
+            
             if let title = buttonTitle {
-                Button(action: {
+                Button {
                     self.tappedOnButton?()
-                }) {
-                    Text(title).padding()
+                } label: {
+                    Text(title)
+                        .padding()
+                        .foregroundColor(.white)
+                        .frame(height: Constants.buttonHeight)
                 }
-                .background(Color.black)
-                .offset(CGSize(width: 0, height: 48))
+                .background(Constants.buttonColor)
+                .cornerRadius(10)
+                
             }
             
         }
@@ -57,6 +63,6 @@ struct TLEmptyView: View {
 
 struct TLEmptyView_Previews: PreviewProvider {
     static var previews: some View {
-        TLEmptyView(message: "Hello ", imageName: "placeholderImage")
+        TLEmptyView(message: "Hello", imageName: "placeholderImage", buttonTitle: "Refresh")
     }
 }
